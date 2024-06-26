@@ -82,3 +82,8 @@ function test13safe($url) {
     //ok: ssrfable
     $remote->mtlsPost("/some/path");
 }
+
+function test14($url) {
+    //ruleid: ssrfable
+    (new Client())->post($url);
+}
