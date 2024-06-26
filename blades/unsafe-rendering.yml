@@ -1,0 +1,25 @@
+rules:
+  - id: unsafe-rendering
+    patterns:
+      - pattern-regex: \{{2,3}.*\$.*}{2,3}
+      - pattern-not-regex: \{{3}
+      - pattern-not-regex: Form
+      - pattern-not-regex: HtmlDecode
+      - pattern-not-regex: ImageTag
+      - pattern-not-regex: Tag
+      - pattern-not-regex: links\(\)
+      - pattern-not-regex: json_encode
+      - pattern-not-regex: ImageRoutePath
+    message: Unescaped rendering `{{ }}` can cause dangerous payload to be executed and can lead to injection attack such as XSS
+    languages:
+      - php
+      - html
+    severity: ERROR
+    metadata:
+      category: security
+      owasp: A1:2017 injection
+    paths:
+      include:
+        - "**/*.blade.php"
+      exclude:
+        - "app/views/components/**/*.blade.php"

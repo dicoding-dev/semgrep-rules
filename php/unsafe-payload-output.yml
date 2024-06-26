@@ -1,0 +1,33 @@
+rules:
+  - id: unsafe-payload-output
+    pattern-either:
+    - pattern: $this->redirector->route('...', $PAYLOAD->getOutput())
+    - pattern: Redirect::route('...', $PAYLOAD->getOutput())
+    - patterns:
+      - pattern-inside: |
+          $OUT = $PAYLOAD->getOutput();
+          ...
+      - pattern-either:
+        - pattern: $this->redirector->route('...', $OUT)
+        - pattern: Redirect::route('...', $OUT)
+    message: Mass output can leak sensitive data. Only output specific data that is safe.
+    languages: [php]
+    severity: ERROR
+    metadata:
+      source_rule_url: https://docs.google.com/document/d/1CpercjIVRuCLCD7bEi9jWtMcvU5QifQrr61SpYtJdq4/edit#heading=h.84z7ul7ubfl9
+    paths:
+      exclude:
+        - "app/commands"
+        - "app/config"
+        - "app/database"
+        - "app/lang"
+        - "app/models"
+        - "app/start"
+        - "app/tests"
+        - "app/views"
+        - "bootstrap"
+        - "DicodingUtils"
+        - "gulpfile.js"
+        - "outs"
+        - "public"
+        - "resources"

@@ -1,0 +1,27 @@
+rules:
+  - id: no-csrf-filter
+    patterns:
+    - pattern-inside: |
+        class $CLASS extends $BASECLASS {
+          public function __construct(...) {
+          ...
+          }
+        }
+    - pattern-not-inside: |
+        class $CLASS extends $BASECLASS {
+          public function __construct(...) {
+            ...
+            $this->beforeFilter('csrf');
+            ...
+          }
+        }
+    - metavariable-regex:
+        metavariable: $CLASS
+        regex: (?i)\w*(store|update|delete|destroy)\w*action
+    message: POST, PUT & DELETE actions need csrf filter
+    languages: [php]
+    severity: ERROR
+    paths:
+      include:
+        - "Dicoding/Web/**/*Action.php"
+        - "security"

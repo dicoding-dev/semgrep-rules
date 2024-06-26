@@ -1,0 +1,16 @@
+rules:
+  - id: unsafe-href
+    patterns:
+    - pattern-inside: href="..."
+    - pattern-not-inside: href="#..."
+    - pattern-regex: \{{2,3}.*\$.*}{2,3}
+    - pattern-not-regex: urlize|route|action
+    message: rendering url must make sure it does not contain executable payload. Use urlize in href.
+    languages:
+      - generic
+    severity: ERROR
+    paths:
+      include:
+        - "**/*.blade.php"
+      exclude:
+        - "app/views/components/**/*.blade.php"

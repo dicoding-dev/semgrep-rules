@@ -1,0 +1,38 @@
+rules:
+  - id: php-stream-exploit
+    pattern-either:
+    - patterns:
+      - pattern: $METHOD($DATA,...)
+      - pattern-not: $METHOD("...", ...)
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: ^(file_get_contents|readfile|getimagesize|md5_file|sha1_file|hash_file|file|parse_ini_file|copy|file_put_contents|stream_get_contents)$
+    - patterns:
+      - pattern: $METHOD("...",$DATA,...)
+      - pattern-not: $METHOD("...","...")
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: ^(hash_file)$
+    - patterns:
+      - pattern-either:
+        - pattern-inside: |
+            function $FUNC(...,$FP,...)
+            {
+              ...
+            }
+        - pattern-inside: |
+            $FP = fopen($SOURCE, ...);
+            ...
+      - pattern-not-inside: |
+          $FP = fopen("...", ...);
+          ...
+      - pattern: $METHOD($FP,...)
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: ^(fgets|fread|fgetc|fgetcsv|fpassthru|fputs)$
+    - patterns:
+      - pattern: $CLASS::compressFile($PATH)
+      - pattern-not: $CLASS::compressFile("...")
+    message: Possibility to use exploit this function call via php://filter payload
+    languages: [php]
+    severity: WARNING
