@@ -6,7 +6,9 @@ rules:
           {
             ...
           }
-      - pattern: $FUNCS(...,$URL, ...);
+      - pattern-either:
+        - pattern: $FUNCS(...,$URL, ...);
+        - pattern: $O->$FUNCS(..., $URL, ...);
       - metavariable-pattern:
           metavariable: $FUNCS
           patterns:
@@ -16,6 +18,9 @@ rules:
                 - pattern: file_get_contents
                 - pattern: curl_init
                 - pattern: readfile
+                - pattern: post
+                - pattern: fetch
+                - pattern: mtlsPost
     message: Potential SSRF
     metadata:
       references:

@@ -52,3 +52,33 @@ function test10safe(){
     //ok: ssrfable
     $file = readfile("index.php");
 }
+
+function test11($url) {
+    //ruleid: ssrfable
+    $remote->post($url);
+}
+
+function test11safe($url) {
+    //ok: ssrfable
+    $remote->post("/some/path");
+}
+
+function test12($url) {
+    //ruleid: ssrfable
+    $remote->fetch($url);
+}
+
+function test12safe($url) {
+    //ok: ssrfable
+    $remote->fetch("/some/path");
+}
+
+function test13($url) {
+    //ruleid: ssrfable
+    $remote->mtlsPost($url);
+}
+
+function test13safe($url) {
+    //ok: ssrfable
+    $remote->mtlsPost("/some/path");
+}
