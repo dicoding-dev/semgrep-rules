@@ -83,7 +83,56 @@ function test13safe($url) {
     $remote->mtlsPost("/some/path");
 }
 
-function test14($url) {
+function guzzleClientTest($url) {
     //ruleid: ssrfable
     (new Client())->post($url);
+
+    //ruleid: ssrfable
+    $remote->put($url);
+
+    //ruleid: ssrfable
+    $remote->get($url);
+
+    //ruleid: ssrfable
+    $remote->delete($url);
+
+    //ruleid: ssrfable
+    $remote->request($url);
+
+    //ruleid: ssrfable
+    $remote->head($url);
+
+    //ruleid: ssrfable
+    $remote->getAsync($url);
+
+    //ruleid: ssrfable
+    $remote->deleteAsync($url);
+
+    //ruleid: ssrfable
+    $remote->headAsync($url);
+
+    //ruleid: ssrfable
+    $remote->postAsync($url);
+
+    //ruleid: ssrfable
+    $remote->putAsync($url);
+
+    //ruleid: ssrfable
+    $remote->requestAsync($url);
+
+    //ruleid: ssrfable
+    $remote->sendAsync($url);
+
+    //ruleid: ssrfable
+    $remote->send($url);
+}
+
+class GuzzleUser {
+    private $client;
+
+    public function request($url)
+    {
+        //ruleid: ssrfable
+        $this->client->requestAsync($url)
+    }
 }

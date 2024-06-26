@@ -21,6 +21,19 @@ rules:
                 - pattern: post
                 - pattern: fetch
                 - pattern: mtlsPost
+                - pattern: get
+                - pattern: put
+                - pattern: delete
+                - pattern: request
+                - pattern: head
+                - pattern: getAsync
+                - pattern: deleteAsync
+                - pattern: headAsync
+                - pattern: postAsync
+                - pattern: putAsync
+                - pattern: requestAsync
+                - pattern: sendAsync
+                - pattern: send
     message: Potential SSRF
     metadata:
       references:
