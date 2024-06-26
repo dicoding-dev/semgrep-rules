@@ -1,0 +1,41 @@
+rules:
+  - id: ssrfable
+    patterns:
+      - pattern-inside: |
+          function $FUNC(...,$URL,...)
+          {
+            ...
+          }
+      - pattern: $FUNCS(...,$URL, ...);
+      - metavariable-pattern:
+          metavariable: $FUNCS
+          patterns:
+            - pattern-either:
+                - pattern: curl_setopt
+                - pattern: fopen
+                - pattern: file_get_contents
+                - pattern: curl_init
+                - pattern: readfile
+    message: Potential SSRF
+    metadata:
+      references:
+        - https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]
+      cwe:
+        - "CWE-918: Server-Side Request Forgery (SSRF)"
+      category: security
+      technology:
+        - php
+      owasp:
+        - A10:2021 - Server-Side Request Forgery (SSRF)
+      cwe2022-top25: true
+      subcategory:
+        - audit
+      likelihood: LOW
+      impact: HIGH
+      confidence: LOW
+      vulnerability_class:
+        - Server-Side Request Forgery (SSRF)
+    languages:
+      - php
+    severity: WARNING
