@@ -1,0 +1,24 @@
+rules:
+  - id: php-filter-inclusion
+    pattern-either:
+    - patterns:
+      - pattern-inside: |
+          function $FUNC(...) {
+            ...
+          }
+      - pattern-regex: (include|require|include_once|require_once)(\(|\s+)
+      # - metavariable-regex:
+      #     metavariable: $INCLUSION
+      #     regex: ^(include|require|include_once|require_once)$
+    # - patterns:
+    #   - pattern-inside: |
+    #       function $FUNC(...) {
+    #         ...
+    #       }
+    #   - pattern: $METHOD("...")
+    #   - metavariable-regex:
+    #       metavariable: $METHOD
+    #       regex: ^(include|require|include_once|require_once)$
+    message: Possibility to exploit inclusion via php://filter payload
+    languages: [php]
+    severity: WARNING
