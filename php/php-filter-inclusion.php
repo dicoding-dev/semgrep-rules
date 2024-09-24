@@ -28,6 +28,15 @@ class SebuahClass {
         include_once "a.php";
         // ruleid: php-filter-inclusion
         require_once "a.php";
+
+        // ok: php-filter-inclusion
+        // require something
+        // ok: php-filter-inclusion
+        # include something
+        // ok: php-filter-inclusion
+        /* require_once something */
+        // ok: php-filter-inclusion
+        // include once something
     }
 
     public function loadViaIncludeFunction($url) {

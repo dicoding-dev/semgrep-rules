@@ -6,7 +6,7 @@ rules:
           function $FUNC(...) {
             ...
           }
-      - pattern-regex: (include|require|include_once|require_once)(\(|\s+)
+      - pattern-regex: ^\s+(include|require|include_once|require_once)(\(|\s+)
       # - metavariable-regex:
       #     metavariable: $INCLUSION
       #     regex: ^(include|require|include_once|require_once)$
