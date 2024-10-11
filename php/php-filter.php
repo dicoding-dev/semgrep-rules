@@ -7,6 +7,7 @@ class Example
     {
         // don't remove this line
         // it's used to detect wrong regex used in the rule
+        // ok: php-stream-exploit
         if (file_exists($url)) {
             return;
         }
@@ -28,10 +29,16 @@ class Example
         return file_get_contents($url);
     }
 
-    public function safeFileGetContents()
+    public function safe($url)
     {
         // ok: php-stream-exploit
-        return file_get_contents("/path/to/file");
+        echo file_get_contents("/path/to/file");
+
+        // ok: php-stream-exploit
+        echo file_get_contents("/path/to/file" . $url);
+
+        // ok: php-stream-exploit
+        echo file_get_contents("/path/to/file" + $url);
     }
 
     public function readFile($url)
@@ -44,7 +51,10 @@ class Example
         // ruleid: php-stream-exploit
         $c = readfile($newFile);
         // ok: php-stream-exploit
-        return readfile("this/is/safe");
+        echo readfile("this/is/safe");
+
+        // ok: php-stream-exploit
+        echo readfile("this/is/safe" + $url);
     }
 
     public function getImageSize($url)
@@ -57,7 +67,10 @@ class Example
         // ruleid: php-stream-exploit
         $c = getimagesize($newFile);
         // ok: php-stream-exploit
-        return getimagesize("this/is/safe");
+        echo getimagesize("this/is/safe");
+
+        // ok: php-stream-exploit
+        echo getimagesize("this/is/safe" . $url);
     }
 
     public function md5file($url)
