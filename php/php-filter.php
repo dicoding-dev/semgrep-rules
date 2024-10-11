@@ -108,8 +108,13 @@ class Example
         $newFile = $_POST['file'];
         // ruleid: php-stream-exploit
         $c = hash_file("sha256", $newFile);
+        
         // ok: php-stream-exploit
-        return hash_file("sha256", "this/is/safe");
+        echo hash_file("sha256", "this/is/safe");
+        // ok: php-stream-exploit
+        echo hash_file("sha256", "this/is/safe" + $url);
+        // ok: php-stream-exploit
+        return hash_file("sha256", "this/is/safe" . $url);
     }
 
     public function file($url)
@@ -180,112 +185,17 @@ class Example
         return parse_ini_file("this/is/safe");
     }
 
-    public function fileGets($file)
+    public function fOpen($file)
     {
         // ruleid: php-stream-exploit
-        fgets($file);
-        
         $b = fopen($file, "r");
         // ruleid: php-stream-exploit
-        fgets($b);
-
         $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fgets($c);
 
+        // ok: php-stream-exploit
         $d = fopen("/this/is/safe", "r");
         // ok: php-stream-exploit
-        return fgets($d);
-    }
-
-    public function fileRead($file, $size)
-    {
-        // ruleid: php-stream-exploit
-        fread($file, $size);
-        
-        $b = fopen($file, "r");
-        // ruleid: php-stream-exploit
-        fread($b, 1000);
-
-        $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fread($c, 2000);
-
-        $d = fopen("/this/is/safe", "r");
-        // ok: php-stream-exploit
-        return fread($d, $size);
-    }
-
-    public function fileGetC($file)
-    {
-        // ruleid: php-stream-exploit
-        fgetc($file);
-        
-        $b = fopen($file, "r");
-        // ruleid: php-stream-exploit
-        fgetc($b);
-
-        $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fgetc($c);
-
-        $d = fopen("/this/is/safe", "r");
-        // ok: php-stream-exploit
-        return fgetc($d);
-    }
-
-    public function fileGetCSV($file)
-    {
-        // ruleid: php-stream-exploit
-        fgetcsv($file, 1000, ",");
-        
-        $b = fopen($file, "r");
-        // ruleid: php-stream-exploit
-        fgetcsv($b, 1000, ",");
-
-        $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fgetcsv($c, 1000, ",");
-
-        $d = fopen("/this/is/safe", "r");
-        // ok: php-stream-exploit
-        return fgetcsv($d, 1000, ",");
-    }
-
-    public function fileFPassthru($file)
-    {
-        // ruleid: php-stream-exploit
-        fpassthru($file);
-        
-        $b = fopen($file, "r");
-        // ruleid: php-stream-exploit
-        fpassthru($b);
-
-        $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fpassthru($c);
-
-        $d = fopen("/this/is/safe", "r");
-        // ok: php-stream-exploit
-        return fpassthru($d);
-    }
-
-    public function fileFPuts($file, $data)
-    {
-        // ruleid: php-stream-exploit
-        fputs($file, $data);
-        
-        $b = fopen($file, "r");
-        // ruleid: php-stream-exploit
-        fputs($b, $data);
-
-        $c = fopen($_POST['file'], "r");
-        // ruleid: php-stream-exploit
-        fputs($c, $data);
-
-        $d = fopen("/this/is/safe", "r");
-        // ok: php-stream-exploit
-        return fputs($d, $data);
+        $e = fopen("/this/is/safe" + $file, "r");
     }
 
     public function compression($path)
@@ -297,5 +207,8 @@ class Example
         
         // ok: php-stream-exploit
         CompressionUtility::compressFile("/this/is/safe");
+
+        // ok: php-stream-exploit
+        CompressionUtility::compressFile("/this/is/safe" + $path);
     }
 }

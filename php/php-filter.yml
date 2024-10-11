@@ -5,36 +5,28 @@ rules:
       - pattern: $METHOD($DATA,...)
       - metavariable-regex:
           metavariable: $METHOD
-          regex: ^(file_get_contents|readfile|getimagesize|md5_file|sha1_file|hash_file|file|parse_ini_file|copy|file_put_contents|stream_get_contents)$
+          regex: ^(file_get_contents|readfile|getimagesize|md5_file|sha1_file|file|parse_ini_file|copy|file_put_contents|stream_get_contents)$
       - metavariable-regex:
           metavariable: $DATA
           regex: \$\w+
     - patterns:
       - pattern: $METHOD("...",$DATA,...)
-      - pattern-not: $METHOD("...","...")
       - metavariable-regex:
           metavariable: $METHOD
           regex: ^(hash_file)$
-    - patterns:
-      - pattern-either:
-        - pattern-inside: |
-            function $FUNC(...,$FP,...)
-            {
-              ...
-            }
-        - pattern-inside: |
-            $FP = fopen($SOURCE, ...);
-            ...
-      - pattern-not-inside: |
-          $FP = fopen("...", ...);
-          ...
-      - pattern: $METHOD($FP,...)
       - metavariable-regex:
-          metavariable: $METHOD
-          regex: ^(fgets|fread|fgetc|fgetcsv|fpassthru|fputs)$
+          metavariable: $DATA
+          regex: \$\w+
+    - patterns:
+      - pattern: fopen($SOURCE,...)
+      - metavariable-regex:
+          metavariable: $SOURCE
+          regex: \$\w+
     - patterns:
       - pattern: $CLASS::compressFile($PATH)
-      - pattern-not: $CLASS::compressFile("...")
+      - metavariable-regex:
+          metavariable: $PATH
+          regex: \$\w+
     message: Possibility to use exploit this function call via php://filter payload
     languages: [php]
     severity: WARNING
