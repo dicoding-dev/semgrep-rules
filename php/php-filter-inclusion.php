@@ -20,14 +20,16 @@ class SebuahClass {
         // ruleid: php-filter-inclusion
         require_once $url;
 
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         include "a.php";
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         require "a.php";
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         include_once "a.php";
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         require_once "a.php";
+        // ok: php-filter-inclusion
+        require_once "a/" + $url;
 
         // ok: php-filter-inclusion
         // require something
@@ -49,13 +51,13 @@ class SebuahClass {
         // ruleid: php-filter-inclusion
         require_once($url);
 
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         include("a.php");
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         include_once("a.php");
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         require("a.php");
-        // ruleid: php-filter-inclusion
+        // ok: php-filter-inclusion
         require_once("a.php");
 
         // ok: php-filter-inclusion
