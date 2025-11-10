@@ -3,6 +3,8 @@ rules:
     patterns:
     - pattern-inside: href="..."
     - pattern-not-inside: href="#..."
+    - pattern-not-inside: |
+        href="mailto..."
     - pattern-regex: \{{2,3}.*\$.*}{2,3}
     - pattern-not-regex: urlize|route|action
     message: rendering url must make sure it does not contain executable payload. Use urlize in href.

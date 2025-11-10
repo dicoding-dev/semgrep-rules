@@ -21,3 +21,6 @@
 
 <!-- ruleid: unsafe-href -->
 <a href="{{{ $url . '#' . $something }}}"></a>
+
+<!-- ok: unsafe-href -->
+<a href="mailto: {{{ $url }}}"></a>
