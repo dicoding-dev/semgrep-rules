@@ -27,6 +27,25 @@ class TestRedirect implements \Dicoding\Web\Http\Responsable {
         return $this->redirector->route('resetpasswordform', $output);
     }
 
+    public function unsafeRedirect4($payload)
+    {
+        // ruleid: unsafe-payload-output
+        return \Redirect::route(
+            'resetpasswordform',
+            $payload->getOutput()
+        );
+    }
+
+    public function unsafeRedirect5($payload)
+    {
+        $output = $payload->getOutput();
+        // ruleid: unsafe-payload-output
+        return \Redirect::route(
+            'resetpasswordform',
+            $output
+        );
+    }
+
     public function safeRedirect1($payload)
     {
         $output = $payload->getOutput();

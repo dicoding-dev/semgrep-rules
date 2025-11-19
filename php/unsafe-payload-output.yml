@@ -3,6 +3,7 @@ rules:
     pattern-either:
     - pattern: $this->redirector->route('...', $PAYLOAD->getOutput())
     - pattern: Redirect::route('...', $PAYLOAD->getOutput())
+    - pattern: \Redirect::route('...', $PAYLOAD->getOutput())
     - patterns:
       - pattern-inside: |
           $OUT = $PAYLOAD->getOutput();
@@ -10,6 +11,7 @@ rules:
       - pattern-either:
         - pattern: $this->redirector->route('...', $OUT)
         - pattern: Redirect::route('...', $OUT)
+        - pattern: \Redirect::route('...', $OUT)
     message: Mass output can leak sensitive data. Only output specific data that is safe.
     languages: [php]
     severity: ERROR
