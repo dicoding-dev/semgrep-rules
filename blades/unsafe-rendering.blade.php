@@ -45,6 +45,7 @@
     {{ !\Util::isEmpty($selected_submitter ?? null) ? json_encode($selected_submitter) : 'null' }}
     <!-- ruleid: unsafe-rendering -->
     {{ !\Util::isEmpty($selected_submitter ?? null) ? jsonDanger($selected_submitter) : 'null' }}
-
+    <!-- ok: unsafe-rendering -->
+    {{--        @if(!$been_shown_classroom_onboarding)--}}
 </body>
 </html>

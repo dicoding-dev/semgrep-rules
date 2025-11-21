@@ -2,6 +2,7 @@ rules:
   - id: unsafe-rendering
     patterns:
       - pattern-regex: \{{2,3}.*\$.*}{2,3}
+      - pattern-not-regex:  \{\{\-\-
       - pattern-not-regex: \{{3}
       - pattern-not-regex: Form
       - pattern-not-regex: HtmlDecode
