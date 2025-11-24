@@ -19,14 +19,14 @@ rules:
       source_rule_url: https://docs.google.com/document/d/1CpercjIVRuCLCD7bEi9jWtMcvU5QifQrr61SpYtJdq4/edit#heading=h.84z7ul7ubfl9
     paths:
       exclude:
-        - "app/commands"
-        - "app/config"
-        - "app/database"
-        - "app/lang"
-        - "app/models"
-        - "app/start"
-        - "app/tests"
-        - "app/views"
+        - "**/app/commands"
+        - "**/app/config"
+        - "**/app/database"
+        - "**/app/lang"
+        - "**/app/models"
+        - "**/app/start"
+        - "**/app/tests"
+        - "**/app/views"
         - "bootstrap"
         - "DicodingUtils"
         - "gulpfile.js"

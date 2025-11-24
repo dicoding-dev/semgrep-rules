@@ -23,5 +23,5 @@ rules:
     severity: ERROR
     paths:
       include:
-        - "Dicoding/Web/**/*Action.php"
+        - "**/Dicoding/Web/**/*Action.php"
         - "security"

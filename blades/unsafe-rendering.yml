@@ -23,4 +23,4 @@ rules:
       include:
         - "**/*.blade.php"
       exclude:
-        - "app/views/components/**/*.blade.php"
+        - "**/app/views/components/**/*.blade.php"
