@@ -1,4 +1,4 @@
 .DEFAULT_GOAL := test
 
 test:
-	semgrep scan --test --legacy
+	opengrep scan --test --legacy
