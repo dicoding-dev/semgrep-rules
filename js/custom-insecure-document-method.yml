@@ -33,3 +33,6 @@ rules:
       - pattern-not-inside: |
           import {sanitize} from 'dompurify'
           ...
+      - pattern-not-inside: |
+          var $DOMPURIFY = require("dompurify")
+          ...

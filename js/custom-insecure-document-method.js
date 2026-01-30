@@ -72,6 +72,21 @@ function ok2() {
     el.innerHTML = sanitize(userInput);
 })()
 
+(function okRequire(userInput) {
+    var dompurify = require("dompurify");
+
+    const el = element.innerHTML;
+
+    // ok: custom-insecure-document-method
+    document.write(dompurify.sanitize(userInput));
+
+    // ok: custom-insecure-document-method
+    document.body.outerHTML = dompurify.sanitize(userInput);
+
+    // ok: custom-insecure-document-method
+    el.innerHTML = dompurify.sanitize(userInput);
+})()
+
 (function notOkNotImported(userInput) {
     const el = element.innerHTML;
 
