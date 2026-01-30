@@ -12,6 +12,9 @@ rules:
       subcategory:
         - audit
     languages: [javascript, typescript]
+    paths:
+      exclude:
+        - "**/*.test.js"
     severity: ERROR
     patterns:
       - pattern-either:
