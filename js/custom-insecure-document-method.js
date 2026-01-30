@@ -42,6 +42,21 @@ function ok2() {
     el.innerHTML = DOMPurify.sanitize(userInput);
 })()
 
+(function ok3LowerCase(userInput) {
+    import dompurify from 'dompurify';
+
+    const el = element.innerHTML;
+
+    // ok: custom-insecure-document-method
+    document.write(dompurify.sanitize(userInput));
+
+    // ok: custom-insecure-document-method
+    document.body.outerHTML = dompurify.sanitize(userInput);
+
+    // ok: custom-insecure-document-method
+    el.innerHTML = dompurify.sanitize(userInput);
+})()
+
 (function ok4(userInput) {
     import {sanitize} from 'dompurify';
 

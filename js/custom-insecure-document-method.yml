@@ -25,10 +25,10 @@ rules:
       - pattern-not: |
           $EL.outerHTML = "...";
       - pattern-not: document.write("...")
-      - pattern-not: $ELEMENT.innerHTML = DOMPurify.sanitize($DATA)
+      - pattern-not: $ELEMENT.innerHTML = $DOMPURIFY.sanitize($DATA)
       - pattern-not: $ELEMENT.innerHTML = sanitize($DATA)
       - pattern-not-inside: |
-          import DOMPurify from 'dompurify'
+          import $DOMPURIFY from 'dompurify'
           ...
       - pattern-not-inside: |
           import {sanitize} from 'dompurify'
