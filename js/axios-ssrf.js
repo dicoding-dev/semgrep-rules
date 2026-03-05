@@ -2,14 +2,32 @@ import { Request, Response, NextFunction } from 'express'
 
 const axios = require('axios')
 
-module.exports = function badNormal () {
-  return (req: Request, res: Response, next: NextFunction) => {
+function caller(req: Request, res: Response, next: NextFunction) {
     const url = "//"+req.body.imageUrl
     const url1 = req.body['imageUrl'] + 123
+
+    badNormal(url)
+    badNormal1(url1)
+    badReceiveReq(req)
+}
+
+function badNormal (url) {
     // ruleid: axios-ssrf
     axios.get(url)
+}
+
+function badNormal1(url) {
     // ruleid: axios-ssrf
     axios.get(url1+123)
+    
+    // ruleid: axios-ssrf
+    axios.get(`${url1}/fooo`)
+    
+    // ruleid: axios-ssrf
+    axios.get("https://"+url1)
+}
+
+function badReceiveReq(req: Request) {
     // ok: axios-ssrf
     axios.get(`https://reddit.com/${req.query.url}/fooo`)
     // ok: axios-ssrf
@@ -31,8 +49,7 @@ module.exports = function badNormal () {
     const a = req.body.url
     // ruleid: axios-ssrf
     axios.get(a)
-    // ruleid: axios-ssrf
-    axios.get(`${url1}/fooo`)
+
     // ruleid: axios-ssrf
     axios.get(a+config_value.url)
 
@@ -58,8 +75,6 @@ module.exports = function badNormal () {
     axios.get(req.body['url']+config_value.url)
 
     // ruleid: axios-ssrf
-    axios.get("https://"+url1)
-    // ruleid: axios-ssrf
     axios.get(`https://${req.body['url']}/fooo`)
     // ruleid: axios-ssrf
     axios.get("https://"+req.body['url']+config_value.url)
@@ -69,43 +84,21 @@ module.exports = function badNormal () {
     axios.get("//"+c+req.body['url']+config_value.url)
     // todo: axios-ssrf
     axios.get("https://google.com"+req.query.url)
-
-}
 }
 
 
-module.exports = function badWithTypes () {
+function badWithTypes () {
   return ({ body }: Request, res: Response, next: NextFunction) => {
     const url = body.url
     // ruleid: axios-ssrf
     axios.get(url)
   }
-
 }
 
-module.exports = function goodWithTypes () {
+function goodWithTypes () {
   return ({ params, query, session }: Request, res: Response, next: NextFunction) => {
     const url = session
     // ok: axios-ssrf
      axios.get(url)
   }
-
-}
-
-
-module.exports = function advanced () {
-  return ({ body }: Request, res: Response, next: NextFunction) => {
-    const url = body.url
-
-    joinModeOrDeepSemgrep(url, res, next)
-
-  }
-
-  function joinModeOrDeepSemgrep (url: string, res: Response, next: NextFunction) {
-
-      // todo: axios-ssrf
-      axios.get(url)
-
-  }
-
 }
