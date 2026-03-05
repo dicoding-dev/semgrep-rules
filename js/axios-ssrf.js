@@ -35,9 +35,21 @@ function caller(req: Request, res: Response, next: NextFunction) {
 function badNormal (url) {
     // ruleid: axios-ssrf
     axios.get(url)
+
+    // ruleid: axios-ssrf
+    axios.get(url+123)
+    
+    // ruleid: axios-ssrf
+    axios.get(`${url}/fooo`)
+    
+    // ruleid: axios-ssrf
+    axios.get("https://"+url)
 }
 
 function badNormal1(url) {
+    // ruleid: axios-ssrf
+    axios.get(url)
+    
     // ruleid: axios-ssrf
     axios.get(url+123)
     
