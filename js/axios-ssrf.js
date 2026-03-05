@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-const axios = require('axios')
+import axios from 'axios'
 
 function caller(req: Request, res: Response, next: NextFunction) {
     const url = "//"+req.body.imageUrl
@@ -49,7 +49,7 @@ function badNormal (url) {
 function badNormal1(url) {
     // ruleid: axios-ssrf
     axios.get(url)
-    
+
     // ruleid: axios-ssrf
     axios.get(url+123)
     
