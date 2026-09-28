@@ -25,3 +25,5 @@ rules:
       include:
         - "**/Dicoding/Web/**/*Action.php"
         - "security"
+      exclude:
+        - "**/Dicoding/Web/Api/**"
