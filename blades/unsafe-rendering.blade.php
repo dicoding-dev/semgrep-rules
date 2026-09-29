@@ -47,6 +47,8 @@
     <div>{!! $leaderboard->appends(['course_id' => e(Input::old('course_id', 0))])->links() !!}</div>
     <!-- ok: unsafe-rendering -->
     {!! !\Util::isEmpty($selected_submitter ?? null) ? json_encode($selected_submitter) : 'null' !!}
+    <!-- ok: unsafe-rendering -->
+    {!! \DicodingUtils\Images\PlatformImage::url($imagePath) !!}
     <!-- ruleid: unsafe-rendering -->
     {!! !\Util::isEmpty($selected_submitter ?? null) ? jsonDanger($selected_submitter) : 'null' !!}
     <!-- ok: unsafe-rendering -->

@@ -11,6 +11,7 @@ rules:
       - pattern-not-regex: links\(\)
       - pattern-not-regex: json_encode
       - pattern-not-regex: ImageRoutePath
+      - pattern-not-regex: 'PlatformImage::'
     message: Unescaped rendering `{!! !!}` can cause dangerous payload to be executed and can lead to injection attack such as XSS
     languages:
       - php
