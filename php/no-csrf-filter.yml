@@ -11,7 +11,7 @@ rules:
         class $CLASS extends $BASECLASS {
           public function __construct(...) {
             ...
-            $this->beforeFilter('csrf');
+            $this->middleware('csrf');
             ...
           }
         }

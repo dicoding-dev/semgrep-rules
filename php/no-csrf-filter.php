@@ -5,7 +5,7 @@ class UserStoreAction extends BaseController
 {
     public function __construct($a, $b, $c)
     {
-        $this->beforeFilter('admin');
+        $this->middleware('admin');
     }
 
     public function action()
@@ -17,7 +17,7 @@ class UserStoreAction extends BaseController
 // ok: no-csrf-filter
 class SafeUserStoreAction extends BaseController  {
     public function __construct() {
-        $this->beforeFilter('csrf');
+        $this->middleware('csrf');
     }
 }
 
@@ -27,7 +27,7 @@ class UserupdateAction extends BaseController  {
     private string $property;
 
     public function __construct() {
-        $this->beforeFilter('csrffff');
+        $this->middleware('csrffff');
     }
 }
 
@@ -37,7 +37,7 @@ class UserupdateYoAction extends BaseController  {
     private string $property;
 
     public function __construct() {
-        $this->beforeFilter('csrffff');
+        $this->middleware('csrffff');
     }
 }
 
@@ -47,28 +47,28 @@ class UpdateYoAction extends BaseController  {
     private string $property;
 
     public function __construct() {
-        $this->beforeFilter('csrffff');
+        $this->middleware('csrffff');
     }
 }
 
 // ok: no-csrf-filter
 class SafeUserUpdateAction extends BaseController  {
     public function __construct() {
-        $this->beforeFilter('csrf');
+        $this->middleware('csrf');
     }
 }
 
 // ruleid: no-csrf-filter
 class UserDeleteAction extends BaseController  {
     public function __construct() {
-        $this->beforeFilter('untrack');
+        $this->middleware('untrack');
     }
 }
 
 // ok: no-csrf-filter
 class SafeDeleteAction extends BaseController  {
     public function __construct() {
-        $this->beforeFilter('csrf');
+        $this->middleware('csrf');
     }
 }
 
