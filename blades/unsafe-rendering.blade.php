@@ -31,6 +31,10 @@
     {!! Form::open(['id' => $courseId]) !!}
     <!-- ok: unsafe-rendering -->
     {!! Form::close() !!}
+    <!-- ruleid: unsafe-rendering -->
+    {!! $registrationForm->html !!}
+    <!-- ok: unsafe-rendering -->
+    <option {!! Input::old('profile') === $profile->value ? 'selected' : '' !!}></option>
     <!-- ok: unsafe-rendering -->
     {!! \DicodingUtils\ViewHelpers\HtmlDecode::renderSafely($value) !!}
     <!-- ruleid: unsafe-rendering -->

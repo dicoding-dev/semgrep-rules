@@ -3,7 +3,8 @@ rules:
     patterns:
       - pattern-regex: \{!!.*\$.*!!\}
       - pattern-not-regex: \{\{--.*--\}\}
-      - pattern-not-regex: Form
+      - pattern-not-regex: 'Form::'
+      - pattern-not-regex: 'Input::'
       - pattern-not-regex: HtmlDecode
       - pattern-not-regex: ImageTag
       - pattern-not-regex: Tag
