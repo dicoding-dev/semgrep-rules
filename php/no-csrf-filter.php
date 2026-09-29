@@ -72,6 +72,20 @@ class SafeDeleteAction extends BaseController  {
     }
 }
 
+// ruleid: no-csrf-filter
+class LegacyUserStoreAction extends BaseController  {
+    public function __construct() {
+        $this->beforeFilter('admin');
+    }
+}
+
+// ok: no-csrf-filter
+class SafeLegacyUserStoreAction extends BaseController  {
+    public function __construct() {
+        $this->beforeFilter('csrf');
+    }
+}
+
 // ok: no-csrf-filter
 class UserIndexAction extends BaseController {
     public function __construct() {

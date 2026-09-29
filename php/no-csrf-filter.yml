@@ -11,6 +11,14 @@ rules:
         class $CLASS extends $BASECLASS {
           public function __construct(...) {
             ...
+            $this->beforeFilter('csrf');
+            ...
+          }
+        }
+    - pattern-not-inside: |
+        class $CLASS extends $BASECLASS {
+          public function __construct(...) {
+            ...
             $this->middleware('csrf');
             ...
           }
